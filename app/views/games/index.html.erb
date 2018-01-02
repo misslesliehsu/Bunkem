@@ -14,7 +14,10 @@
       <tr>
         <td><%= game.id %></td>
         <td><%= "#{game.users.count} / #{game.player_count}" %></td>
-        <td><%= link_to "Join Game", game, method: "post" %></td>
+        <td><%= link_to "Join Game", participants_path(game: game.id), method: "post" %></td>
+
+
+
       </tr>
     <% end %>
   <% end %>
