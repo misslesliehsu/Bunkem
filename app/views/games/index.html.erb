@@ -1,1 +1,21 @@
-<h1>Hi!</h1>
+<h1>Bunk 'Em</h1>
+<h3>It's Kinda Balderdash!</h3>
+
+<h2>LOBBY</h2>
+
+<table>
+  <tr>
+    <th>Game Number</th>
+    <th>Open Spots</th>
+    <th>Join?</th>
+  </tr>
+  <% @games.each do |game| %>
+    <% if game.users.count < game.player_count %>
+      <tr>
+        <td><%= game.id %></td>
+        <td><%= "#{game.users.count} / #{game.player_count}" %></td>
+        <td><%= link_to "Join Game", game %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
