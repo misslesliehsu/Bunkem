@@ -5,6 +5,12 @@ class GamesController < ApplicationController
   end
 
   def create
+    @game = @game.new(game_params)
+    if @game.save
+      redirect_to @game
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -14,7 +20,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params(:)
+    params.require(:game).permit(:player_count)
   end
 
 end
