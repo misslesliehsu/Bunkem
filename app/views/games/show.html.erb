@@ -1,0 +1,14 @@
+<h1>Game Page!</h1>
+
+<!-- list total people, who is currently playing -->
+<h3><%= @game.users.count %> out of <%= @game.player_count %> Players Currently In Game</h3>
+
+<% if @game.users.count != @game.player_count %>
+  <h3>Waiting for players, hang in there!</h3>
+  <%= button_to "Refresh", @game %>
+<% end %>
+<!-- conditional that tells them to wait for game to start -->
+<% if @game.users.count == @game.player_count %>
+
+<% end %>
+<!-- pretty refresh button -->
