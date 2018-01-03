@@ -3,11 +3,34 @@ class Game < ApplicationRecord
   has_many :definitions
   has_many :users, through: :participants
 
-  def find_or_set_word
-    
-    self.update(word: Word.all.sample.word) if !self.word
+
+  def find_or_set_word  #will return the game play word
+    if !self.word
+      set_word
+    end
     self.word
   end
+
+
+  def set_word
+    play_word = Word.all.sample.word
+    if used_words.include?(play_word)
+      set_word
+    else
+      self.update(word: play_word)
+    end
+  end
+
+
+  def used_words
+    used_words =
+    self.users.map do |user|
+      user.games.map do |game|
+        game.word
+      end
+    end.flatten.compact
+  end
+
 
   def title
     "#{self.participants.first.user.name} - #{self.id}"

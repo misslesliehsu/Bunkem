@@ -15,6 +15,12 @@
   <h3>Waiting for players, hang in there!</h3>
   <%= button_to "Refresh", @game, method: :get %>
 
+
+  <%= button_to "Leave Game", Participant.find_by(user:current_user, game: @game), method: :delete %>
+
+
+
+
 <% when "Waiting for Submissions" %>
   <% if !@game.definition_users.include?(current_user) %>
     <%= flash[:error] if flash[:error] %>
