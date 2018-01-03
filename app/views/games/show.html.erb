@@ -2,13 +2,28 @@
 
 <!-- list total people, who is currently playing -->
 <h3><%= @game.users.count %> out of <%= @game.player_count %> Players Currently In Game</h3>
+<h3>Players:</h3>
+<ul>
+<% @game.users.each do |user| %>
+  <li><%= user.name %></li>
+<% end %>
 
 <% if @game.users.count != @game.player_count %>
   <h3>Waiting for players, hang in there!</h3>
-  <%= button_to "Refresh", @game %>
+  <%= button_to "Refresh", @game, method: :get %>
 <% end %>
 <!-- conditional that tells them to wait for game to start -->
 <% if @game.users.count == @game.player_count %>
+  <!-- display WORD -->
 
+  <!-- if you haven't submitted then display input box -->
+
+  <!-- if you have submitted, but someone else hasn't, display "be patient!" & refresh button -->
+
+  <!-- if EVERYONE submitted, display all answers w/ voting box -->
+
+  <!-- if you have voted, but someone else hasn't, display "be patient!" & refresh button -->
+
+  <!-- display vote counts, reveal real definition & congratulate winner -->
 <% end %>
 <!-- pretty refresh button -->
