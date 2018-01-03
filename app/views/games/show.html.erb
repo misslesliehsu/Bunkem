@@ -20,7 +20,7 @@
     <%= flash[:error] if flash[:error] %>
 
     <h3>What is the definition of:</h3>
-    <h2><%= @game.find_word %>?</h2>
+    <h2><%= @game.find_or_set_word %>?</h2>
     <%= form_for @definition do |f| %>
       <%= f.text_field :content %>
       <%= f.hidden_field :user_id, value: current_user.id %>
@@ -32,14 +32,29 @@
     <%= button_to "Refresh", @game, method: :get %>
   <% end %>
 
-
 <% when "Waiting for Votes" %>
+  <% if !@game.definition_users.include?(User.find_by(name:"THE BUNKER")) %>
+  <%@game.set_real_definition%>
+  <%end%>
+
   <% if !@game.definition_voters.include?(current_user) %>
+    <h2><%= @game.find_or_set_word %>?</h2>
+    <h3>What's the real definition of this word?</h3>
+
+    <%=form_for @vote do |f|%>
+    <%=f.collection_radio_buttons :definition_id, @game.definitions.shuffle, :id, :content%>
+    <%=f.submit%>
+    <%end%>
+
+
   <% else %>
-    <!-- waiting for other players -->
+  <h3>Waiting for players to vote, hang in there!</h3>
+  <%= button_to "Refresh", @game, method: :get %>
   <% end %>
 
 <% when "Done" %>
+<!-- show definitions & votes; highlight correct definition -->
+<!-- show users & points -->
   <%  %>
 
 <% end %>

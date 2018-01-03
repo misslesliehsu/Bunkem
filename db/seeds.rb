@@ -22,3 +22,6 @@ alphabet.each do |letter|
     Word.create(word: word.children[0].text, definition: word.children[1].text.chomp("\r\n"))
   end
 end
+
+
+User.create(name: "THE BUNKER", password: "THE BUNKER")

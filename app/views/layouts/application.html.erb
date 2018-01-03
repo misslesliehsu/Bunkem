@@ -11,7 +11,7 @@
 
   <body>
     <div class="container">
-      <h3><%= current_user.name %></h3>
+      <h3><%= current_user.name if current_user_id%></h3>
       <%= yield %>
     </div>
   </body>

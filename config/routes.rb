@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :participants, only: [:create, :destroy]
   resources :definitions, only: [:create, :destroy]
+  resources :votes, only: [:create, :destroy]
 
 
   get "/login", to: "sessions#new", as: "signin"
