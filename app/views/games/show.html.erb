@@ -55,6 +55,7 @@
   <% end %>
 
 <% when "Done" %>
+  <%= link_to "Home", root_path %>
   <h2><%= @game.find_or_set_word %></h2>
 
   <table>
@@ -71,14 +72,3 @@
   </table>
 
 <% end %>
-
-
-    <!-- if you haven't submitted then display input box -->
-
-    <!-- if you have submitted, but someone else hasn't, display "be patient!" & refresh button -->
-
-    <!-- if EVERYONE submitted, display all answers w/ voting box -->
-
-    <!-- if you have voted, but someone else hasn't, display "be patient!" & refresh button -->
-
-    <!-- display vote counts, reveal real definition & congratulate winner -->

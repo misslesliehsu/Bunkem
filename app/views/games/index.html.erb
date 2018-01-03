@@ -1,20 +1,54 @@
 <h1>Bunk 'Em</h1>
 <h3>It's Kinda Balderdash!</h3>
 
+
 <h2>LOBBY</h2>
 
 <% if signed_in? %>
+  <%= link_to "Account", current_user %>
   <%= link_to "Log Out", sessions_path, method: :delete %>
 <% else %>
   <%= link_to "Log In", signin_path %>
 <% end %>
 
+<% if signed_in? %>
+  <h3>Your Games</h3>
+
+  <!-- ongoing_games = current_user.games.where(users.count == player_count).where(status != "Done") -->
+  <table>
+    <tr>
+      <th>Game Number</th>
+      <th>Filled Spots</th>
+      <th>View?</th>
+    </tr>
+    <% current_user.games.each do |game| %>
+      <% if game.status != "Done" %>
+      <tr>
+        <td><%= game.title %></td>
+        <td><%= "#{game.users.count} / #{game.player_count}" %></td>
+        <% if game.users.count == game.player_count %>
+          <td><%= link_to "Keep Playing", game %></td>
+        <% else %>
+          <td><%= link_to "Waiting for Players", game %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+
+  </table>
+<% end %>
+
+
+
 <h3>Start a New Game</h3>
 <%= form_for @game do |f| %>
   <%= f.label :player_count %>
   <%= f.select :player_count, (2..20) %>
+
   <%= f.submit %>
 <% end %>
+
+<h3>Open Games</h3>
 
 <table>
   <tr>
@@ -23,14 +57,12 @@
     <th>Join?</th>
   </tr>
   <% @games.each do |game| %>
-    <% if game.users.count < game.player_count %>
+    <% if game.users.count < game.player_count && current_user && !current_user.games.include?(game) %>
       <tr>
-        <td><%= game.id %></td>
+        <td><%= game.title %></td>
         <td><%= "#{game.users.count} / #{game.player_count}" %></td>
         <td><%= link_to "Join Game", participants_path(game: game.id), method: "post" %></td>
       </tr>
     <% end %>
   <% end %>
 </table>
-
-<!-- GAMES YOU ARE IN  -->

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find(current_user_id)
+    User.find(current_user_id) if current_user_id
     #returns nil if no current_user, otherwise returns User object
   end
 
