@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :games, except: :destroy
   resources :users
   resources :participants, only: [:create, :destroy]
+  resources :definitions, only: [:create, :destroy]
 
 
   get "/login", to: "sessions#new", as: "signin"
