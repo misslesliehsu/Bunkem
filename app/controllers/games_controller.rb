@@ -4,13 +4,18 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    @game = Game.new
   end
 
   def create
-    @game = @game.new(game_params)
+    @game = Game.new(game_params)
     if @game.save
+      if !@game.users.include?(current_user)
+        @participant = Participant.create(user: current_user, game:@game)
+      end
       redirect_to @game
     else
+      flash[:errors] = @game.errors.full_messages
       redirect_to root_path
     end
   end

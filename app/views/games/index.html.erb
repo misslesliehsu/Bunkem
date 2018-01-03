@@ -9,6 +9,13 @@
   <%= link_to "Log In", signin_path %>
 <% end %>
 
+<h3>Start a New Game</h3>
+<%= form_for @game do |f| %>
+  <%= f.label :player_count %>
+  <%= f.select :player_count, (2..20) %>
+  <%= f.submit %>
+<% end %>
+
 <table>
   <tr>
     <th>Game Number</th>
@@ -26,8 +33,4 @@
   <% end %>
 </table>
 
-<!-- dont let them join multiple times! -->
-
-<!-- login
-
-create game -->
+<!-- GAMES YOU ARE IN  -->

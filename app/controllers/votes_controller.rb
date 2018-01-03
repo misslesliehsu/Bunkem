@@ -8,7 +8,7 @@ class VotesController < ApplicationController
     else
       "this is weird!"
     end
-    
+
   end
 
 

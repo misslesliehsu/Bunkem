@@ -41,8 +41,10 @@
     <h2><%= @game.find_or_set_word %>?</h2>
     <h3>What's the real definition of this word?</h3>
 
+    <% def_options = @game.definitions.select {|d| d.user != current_user}.shuffle %>
+
     <%=form_for @vote do |f|%>
-    <%=f.collection_radio_buttons :definition_id, @game.definitions.shuffle, :id, :content%>
+    <%=f.collection_radio_buttons :definition_id, def_options, :id, :content%>
     <%=f.submit%>
     <%end%>
 
@@ -53,9 +55,20 @@
   <% end %>
 
 <% when "Done" %>
-<!-- show definitions & votes; highlight correct definition -->
-<!-- show users & points -->
-  <%  %>
+  <h2><%= @game.find_or_set_word %></h2>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Points</th>
+    </tr>
+  <% @game.assign_points.each do |name, points| %>
+    <tr>
+      <td><%= name %></td>
+      <td><%= points %></td>
+    </tr>
+  <% end %>
+  </table>
 
 <% end %>
 

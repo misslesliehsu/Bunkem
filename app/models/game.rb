@@ -59,9 +59,19 @@ class Game < ApplicationRecord
   end
 
   def assign_points
+    user_points = {}
+    real_def = self.definitions.find_by(user: User.find_by(name: "THE BUNKER"))
     #points for users who made votes associated to the right definition
+    self.definitions.each do |definition|
+      user_points[definition.user.name] = definition.votes.count * 100 if definition != real_def
+    end
+
+    real_def.votes.each do |vote|
+      user_points[vote.voter.name] += 100
+    end
     #points for users who made definitions earning votes
     #return hash of users & points
+    user_points
   end
 
 
