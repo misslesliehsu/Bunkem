@@ -2,7 +2,9 @@ class ParticipantsController < ApplicationController
 
   def create
     @game = Game.find(params[:game])
-    @participant = Participant.create(user: current_user, game:@game)
+    if !@game.users.include?(current_user)
+      @participant = Participant.create(user: current_user, game:@game)
+    end
     redirect_to @game
   end
 

@@ -3,6 +3,12 @@
 
 <h2>LOBBY</h2>
 
+<% if signed_in? %>
+  <%= link_to "Log Out", sessions_path, method: :delete %>
+<% else %>
+  <%= link_to "Log In", signin_path %>
+<% end %>
+
 <table>
   <tr>
     <th>Game Number</th>
@@ -21,3 +27,7 @@
 </table>
 
 <!-- dont let them join multiple times! -->
+
+<!-- login
+
+create game -->
