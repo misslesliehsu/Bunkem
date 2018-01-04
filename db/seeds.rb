@@ -18,7 +18,7 @@ alphabet.each do |letter|
 
   words.shift
 
-  words.take(1000).each do |word|
+  words.take(10).each do |word|
     Word.create(word: word.children[0].text, definition: word.children[1].text.chomp("\r\n"))
   end
 end
