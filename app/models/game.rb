@@ -46,10 +46,10 @@ class Game < ApplicationRecord
       "Waiting for Submissions"
     elsif full? && all_defs? && !all_voted?
       "Waiting for Votes"
-    elsif all_voted?
-      "Done"
+    elsif all_voted? && !done
+      "Votes In"
     else
-      "Something went horribly wrong!!!"
+      "Done"
     end
   end
 
