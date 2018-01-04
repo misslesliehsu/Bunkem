@@ -24,4 +24,4 @@ alphabet.each do |letter|
 end
 
 
-# User.create(name: "THE BUNKER", password: "THE BUNKER")
+User.create(name: "THE BUNKER", password: "THE BUNKER")

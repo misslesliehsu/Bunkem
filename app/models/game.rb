@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   has_many :participants
   has_many :definitions
   has_many :users, through: :participants
+  belongs_to :owner, class_name: "User"
 
   serialize :points_hash
 
@@ -35,11 +36,7 @@ class Game < ApplicationRecord
 
 
   def title
-    if self.participants.empty?
-      "Empty - #{self.id}"
-    else
-      "#{self.participants.first.user.name} - #{self.id}"
-    end
+    "#{self.owner.name} - #{self.id}"
   end
 
   def status

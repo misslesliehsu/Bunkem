@@ -9,6 +9,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    @game.owner = current_user
     if @game.save
       if !@game.users.include?(current_user)
         @participant = Participant.create(user: current_user, game:@game)

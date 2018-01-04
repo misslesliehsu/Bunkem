@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :participants
   has_many :votes, foreign_key: "voter_id"
   has_many :games, through: :participants
+  has_many :my_games, class_name: "Game", foreign_key: "owner_id"
 
   validates_presence_of :name
   validates_uniqueness_of :name
