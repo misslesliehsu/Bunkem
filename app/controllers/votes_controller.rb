@@ -1,7 +1,6 @@
 class VotesController < ApplicationController
 
   def create
-    byebug
     @vote = Vote.new(vote_params)
     @vote.voter_id = current_user_id
     if @vote.save

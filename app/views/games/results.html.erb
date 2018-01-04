@@ -1,0 +1,16 @@
+<h1>Results Page</h1>
+
+<h2>Congratulations, <%=@final_points_hash.keys.first%>!</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Total Points</th>
+  </tr>
+<% @final_points_hash.each do |name, points| %>
+  <tr>
+    <td><%= name %></td>
+    <td><%= points %></td>
+  </tr>
+<% end %>
+</table>

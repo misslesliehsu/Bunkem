@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :votes, foreign_key: "voter_id"
   has_many :games, through: :participants
 
-  validates_presence_of :name, :password
+  validates_presence_of :name
   validates_uniqueness_of :name
 
   #Lifetime Points
@@ -23,7 +23,7 @@ class User < ApplicationRecord
   #Games lost
 
   #Percent wins
-  
+
   #Ranking of all players
 
   #Part of speech column?

@@ -113,6 +113,7 @@ class Game < ApplicationRecord
 
   def set_battle_id(b_id = self.id)
     self.battle_id = b_id
+    self.save
   end
 
   def set_users(participant_ids)

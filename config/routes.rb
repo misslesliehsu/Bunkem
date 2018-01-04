@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   post "/nextround", to: "games#next_round", as: "next_round"
 
+  post "/gameresults", to: "games#results", as: "results"
+
   get "/login", to: "sessions#new", as: "signin"
   post "/sessions", to: "sessions#create"
   delete "/sessions", to: "sessions#destroy"

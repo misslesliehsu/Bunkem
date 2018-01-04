@@ -72,12 +72,16 @@
   <% @game.assign_points.each do |name, points| %>
     <tr>
       <td><%= name %></td>
-      <td><%= points %></td>
+      <td>+<%= points %></td>
     </tr>
   <% end %>
   </table>
 
   <%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
+  <%= link_to "Done Playing", results_path(battle_id: @game.battle_id), method: "post"%>
+
+
+
 <% end %>
 
 <!--
