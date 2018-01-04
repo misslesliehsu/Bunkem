@@ -89,7 +89,7 @@ class Game < ApplicationRecord
   end
 
   def set_real_definition
-    self.definitions << Definition.create(user: User.find_by(name: "THE BUNKER"), game: self, content: Word.find_by(word: self.word).definition)
+    self.definitions << Definition.create(user: User.find_by(name: "THE BUNKER"), game: self, content: Word.find_by(word: self.word).definition.gsub(";",", or"))
   end
 
   def assign_points

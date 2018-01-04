@@ -64,18 +64,30 @@
   <%= link_to "Home", root_path %>
   <h2><%= @game.find_or_set_word %></h2>
 
+  <% point_hash = @game.assign_points %>
   <table>
     <tr>
-      <th>Name</th>
-      <th>Points</th>
+      <th>Player</th>
+      <th>Points Earned</th>
+      <th>Definition</th>
+      <th>Who Got Bunked?</th>
     </tr>
-  <% @game.assign_points.each do |name, points| %>
+    <% @game.definitions.each do |definition| %>
     <tr>
-      <td><%= name %></td>
-      <td>+<%= points %></td>
+      <td>
+        <% if definition.user.name == "THE BUNKER" %>
+            <%= "CORRECT DEFINITION" %>
+          <% else %>
+           <%= definition.user.name %>
+         <% end %>
+      </td>
+      <td><%= "+ #{point_hash[definition.user.name]}" if definition.user.name != "THE BUNKER" %></td>
+      <td><%= definition.content %></td>
+      <td><%= definition.voters.map {|voter| voter.name}.join(", ") %></td>
     </tr>
-  <% end %>
+    <% end %>
   </table>
+
 
   <%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
   <%= link_to "Done Playing", results_path(battle_id: @game.battle_id), method: "post"%>
