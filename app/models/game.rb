@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :users, through: :participants
 
   def find_or_set_word
-    
+
     self.update(word: Word.all.sample.word) if !self.word
     self.word
   end
