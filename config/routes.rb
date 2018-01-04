@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :definitions, only: [:create, :destroy]
   resources :votes, only: [:create, :destroy]
 
+  post "/nextround", to: "games#next_round", as: "next_round"
 
   get "/login", to: "sessions#new", as: "signin"
   post "/sessions", to: "sessions#create"

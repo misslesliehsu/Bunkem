@@ -77,7 +77,7 @@
   <% end %>
   </table>
 
-  <%= link_to "Play Another Round", games_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
+  <%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
 <% end %>
 
 <!--

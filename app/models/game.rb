@@ -115,5 +115,12 @@ class Game < ApplicationRecord
     self.battle_id = b_id
   end
 
+  def set_users(participant_ids)
+    participant_ids.each do |p_id|
+      self.users << Participant.find(p_id).user
+    end
+  end
+
+
 
 end

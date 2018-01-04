@@ -22,9 +22,9 @@ class GamesController < ApplicationController
   end
 
   def next_round
-    @game = Game.new(game_params)
+    @game = Game.new(player_count:params[:player_count]) 
     if @game.save
-      @game.set_participants(params[:participants])
+      @game.set_users(params[:participants])
       @game.set_battle_id(params[:battle_id])
       redirect_to @game
     else
