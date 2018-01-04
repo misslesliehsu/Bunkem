@@ -18,10 +18,10 @@ alphabet.each do |letter|
 
   words.shift
 
-  words.take(10).each do |word|
+  words.first(10).each do |word|
     Word.create(word: word.children[0].text, definition: word.children[1].text.chomp("\r\n"))
   end
 end
 
 
-User.create(name: "THE BUNKER", password: "THE BUNKER")
+# User.create(name: "THE BUNKER", password: "THE BUNKER")
