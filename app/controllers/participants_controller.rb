@@ -9,6 +9,9 @@ class ParticipantsController < ApplicationController
   end
 
   def destroy
+    @participant = Participant.find(params[:id])
+    @participant.destroy
+    redirect_to games_path
   end
 
 end

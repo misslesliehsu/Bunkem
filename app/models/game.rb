@@ -3,14 +3,43 @@ class Game < ApplicationRecord
   has_many :definitions
   has_many :users, through: :participants
 
-  def find_or_set_word
+  serialize :points_hash
 
-    self.update(word: Word.all.sample.word) if !self.word
+
+  def find_or_set_word  #will return the game play word
+    if !self.word
+      set_word
+    end
     self.word
   end
 
+
+  def set_word
+    play_word = Word.all.sample.word
+    if used_words.include?(play_word)
+      set_word
+    else
+      self.update(word: play_word)
+    end
+  end
+
+
+  def used_words
+    used_words =
+    self.users.map do |user|
+      user.games.map do |game|
+        game.word
+      end
+    end.flatten.compact
+  end
+
+
   def title
-    "#{self.participants.first.user.name} - #{self.id}"
+    if self.participants.empty?
+      "Empty - #{self.id}"
+    else
+      "#{self.participants.first.user.name} - #{self.id}"
+    end
   end
 
   def status
@@ -65,6 +94,7 @@ class Game < ApplicationRecord
 
   def assign_points
     user_points = {}
+
     real_def = self.definitions.find_by(user: User.find_by(name: "THE BUNKER"))
     #points for users who made votes associated to the right definition
     self.definitions.each do |definition|
@@ -76,7 +106,13 @@ class Game < ApplicationRecord
     end
     #points for users who made definitions earning votes
     #return hash of users & points
-    user_points
+    self.points_hash = user_points.sort_by {|key, value| value}.reverse.to_h
+    self.save
+    self.points_hash
+  end
+
+  def set_battle_id(b_id = self.id)
+    self.battle_id = b_id
   end
 
 

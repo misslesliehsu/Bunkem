@@ -8,4 +8,28 @@ class User < ApplicationRecord
   validates_presence_of :name, :password
   validates_uniqueness_of :name
 
+  #Lifetime Points
+
+  #Who they’ve voted for
+
+  #How many times they’ve won
+
+  #How many times they’ve guessed correctly
+
+  #Who has voted for them
+
+  #Games played
+
+  #Games lost
+
+  #Percent wins
+  
+  #Ranking of all players
+
+  #Part of speech column?
+
+  #Best Definition
+
+  #Perfect Games
+
 end

@@ -13,6 +13,19 @@ class GamesController < ApplicationController
       if !@game.users.include?(current_user)
         @participant = Participant.create(user: current_user, game:@game)
       end
+      @game.set_battle_id
+      redirect_to @game
+    else
+      flash[:errors] = @game.errors.full_messages
+      redirect_to root_path
+    end
+  end
+
+  def next_round
+    @game = Game.new(game_params)
+    if @game.save
+      @game.set_participants(params[:participants])
+      @game.set_battle_id(params[:battle_id])
       redirect_to @game
     else
       flash[:errors] = @game.errors.full_messages

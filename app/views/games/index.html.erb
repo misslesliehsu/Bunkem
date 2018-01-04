@@ -27,9 +27,9 @@
         <td><%= game.title %></td>
         <td><%= "#{game.users.count} / #{game.player_count}" %></td>
         <% if game.users.count == game.player_count %>
-          <td><%= link_to "Keep Playing", game %></td>
+          <td><div class="button green"><%= link_to "Keep Playing", game, class: "b_link" %></div></td>
         <% else %>
-          <td><%= link_to "Waiting for Players", game %></td>
+          <td><div class="button yellow"><%= link_to "Waiting for Players", game, class: "b_link" %></div></td>
         <% end %>
       </tr>
       <% end %>

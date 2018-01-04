@@ -40,3 +40,36 @@ td {
   width: 90%;
   margin: auto;
 }
+
+.button:hover {
+  box-shadow: 0 0 0 0;
+  padding: 3px 0px 0px 0px;
+}
+
+.button {
+  position: relative;
+  float: left;
+  margin: auto;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  transition: padding 0.1s, box-shadow 0.1s, top 0.1s;
+  width: 60%;
+}
+
+.green {
+  background-color: rgb(106 166 7);
+  box-shadow: 0 2px 0 rgb(66 126 0);
+}
+
+.yellow {
+  background-color: rgb(255 185 4);
+  box-shadow: 0 2px 0 rgb(215 145 0);
+}
+
+.b_link {
+  text-decoration: none;
+  color: #FFF;
+  font-weight: 500;
+  padding: 2%;
+  width: 100%;
+}
