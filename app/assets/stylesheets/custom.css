@@ -1,7 +1,6 @@
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #EAFDE6;
-  background-image: url('dictionary-page.jpg');
   background-repeat: repeat-x;
   background-position: -25%;
   margin: 0;
@@ -12,9 +11,13 @@ h1 {
   text-align: center;
   font-size: 7em;
   color: #88C425;
-  margin: 4% 0 0 0;
+  margin: 5% 0 0 0;
   text-shadow: 0.03em 0.03em 0 rgba(35, 50, 25, 0.15);
   letter-spacing: .05em;
+}
+
+.definition {
+  letter-spacing: .1em;
 }
 
 h3 {
@@ -31,6 +34,14 @@ h2 {
   font-size: 3em;
   color: #88C425;
   margin: 2% 0 0 0;
+}
+
+h4 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #6aa607;
+  margin: 0 0 1% 0;
+  font-weight: 700;
 }
 
 table {
@@ -138,8 +149,12 @@ hr {
   width: 94%;
 }
 
+.quarter {
+  width: 25%;
+}
+
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #6aa607;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -236,4 +251,99 @@ input {
   border: solid 1px #DDD;
   display: block;
   margin: 2% auto;
+}
+
+ol {
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  margin: auto;
+}
+
+.player {
+  margin: auto;
+  display: inline-block;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #3e8e41;
+  padding: 1%;
+  text-align: center;
+}
+
+.players {
+  overflow: auto;
+  margin: auto;
+  width: 50%;
+}
+
+.button input {
+  border: none;
+  height: 1.75em;
+}
+
+#definition_content {
+  width: 80%;
+  font-size: 1.5em;
+}
+
+.error {
+  font-weight: 700;
+  color: red;
+  margin-top: 1%;
+}
+
+.result-table {
+  width: 90%;
+  margin: 1% auto 2% auto;
+}
+
+.result-table th {
+  background-color: #1B676B;
+  color: #FFF;
+  width: 25%;
+}
+
+.result-table td {
+  width: 25%;
+  text-align: center;
+  background-color: #eefce3;
+  padding: .5% 0 1% 0;
+}
+
+.radios {
+  font-size: 1.5em;
+}
+
+.radio {
+  display: block;
+  margin: auto;
+}
+
+.end-table {
+  width: 90%;
+  margin: 1% auto 2% auto;
+}
+
+.end-table th {
+  background-color: #1B676B;
+  color: #FFF;
+  width: 25%;
+}
+
+.end-table td {
+  width: 25%;
+  text-align: center;
+  background-color: #eefce3;
+  padding: .5% 0 1% 0;
+}
+
+.votes {
+  list-style: square;
+  width: 60%;
+}
+
+.votes li {
+  float: left;
 }

@@ -32,7 +32,6 @@
 
   </table>
 </div>
-<% end %>
 
 <div class="section col third">
 <h3>Start a New Game</h3>
@@ -46,6 +45,7 @@
     <% end %>
   </div>
 </div>
+<% end %>
 
 <div class="section col two-third">
 <h3>Open Games</h3>
@@ -70,11 +70,11 @@
 
 <div class="section col third">
 <h3>Top Players</h3>
-  <ul>
+  <ol>
   <% User.top_players.each do |hash| %>
     <% if hash.values.first > 0 %>
       <li><%= hash.keys.first %> with <%= hash.values.first %> points</li>
     <% end %>
   <% end %>
-  </ul>
+  </ol>
 </div>

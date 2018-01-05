@@ -6,7 +6,7 @@
   <h2>Congratulations, <%=@final_points_hash.keys.first%>!</h2>
 <% end %>
 
-<table>
+<table class="end-table">
   <tr>
     <th>Name</th>
     <th>Total Points</th>
@@ -18,3 +18,5 @@
   </tr>
 <% end %>
 </table>
+
+<div class="green button center quarter"><%= link_to "Back to Game Lobby", root_path, class: "b_link" %></div>

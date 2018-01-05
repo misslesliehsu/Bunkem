@@ -1,38 +1,42 @@
-<h1>Game Page!</h1>
+<h1>Let's Bunk!</h1>
 
 <!-- list total people, who is currently playing -->
-<h3><%= @game.users.count %> out of <%= @game.player_count %> Players Currently In Game</h3>
-<h3>Players:</h3>
-<ul>
-<% @game.users.each do |user| %>
-  <li><%= user.name %></li>
-<% end %>
 
-<h3><%= @game.status %></h3>
+<div class="center">
+<h3>Players:</h3>
+<div class="center players">
+<% @game.users.each do |user| %>
+  <div class="player"><%= user.name %></div>
+<% end %>
+</ul>
+</div>
+</div><br>
 
 <% case @game.status %>
 <% when "Waiting for Players" %>
   <h3>Waiting for players, hang in there!</h3>
-  <div class="button green"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
+  <div class="button green quarter center"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
+  <br>
 
-
-  <div class="button red"><%= link_to "Leave Game", Participant.find_by(user:current_user, game: @game), method: :delete, class: "b_link" %></div>
+  <div class="button red quarter center"><%= link_to "Leave Game", Participant.find_by(user:current_user, game: @game), method: :delete, class: "b_link" %></div>
 
 <% when "Waiting for Submissions" %>
   <% if !@game.definition_users.include?(current_user) %>
-    <%= flash[:error] if flash[:error] %>
+    <div class="center"><%= flash[:error] if flash[:error] %></div>
 
     <h3>What is the definition of:</h3>
-    <h2><%= @game.find_or_set_word %>?</h2>
+    <h2 class="definition"><%= @game.find_or_set_word %>?</h2>
+    <div class="user-form">
     <%= form_for @definition do |f| %>
       <%= f.text_field :content %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :game_id, value: @game.id %>
-      <%= f.submit %>
+      <div class="green button"><%= f.submit "Submit Definition", class: "b_link" %></div>
     <% end %>
+    </div>
   <% else %>
     <h3>Waiting for players to submit definitions, hang in there!</h3>
-    <%= button_to "Refresh", @game, method: :get %>
+    <div class="button green quarter center"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
   <% end %>
 
 <% when "Waiting for Votes" %>
@@ -47,22 +51,26 @@
     <% def_options = @game.definitions.select {|d| d.user != current_user}.shuffle %>
 
     <%=form_for @vote do |f|%>
-    <%=f.collection_radio_buttons :definition_id, def_options, :id, :content%>
-    <%=f.submit%>
+    <div class="radios center">
+      <%= f.collection_radio_buttons(:definition_id, def_options, :id, :content) do |b| %>
+        <div class="radio"><%= b.label {b.radio_button + b.text} %></div><br>
+      <% end %>
+    </div>
+    <div class="green button quarter"><%=f.submit "Cast Vote", class: "b_link"%></div>
     <%end%>
 
 
   <% else %>
   <h3>Waiting for players to vote, hang in there!</h3>
-  <%= button_to "Refresh", @game, method: :get %>
+  <div class="button green quarter center"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
+
   <% end %>
 
 <% when "Votes In" %>
-  <%= link_to "Home", root_path %>
   <h2><%= @game.find_or_set_word %></h2>
 
   <% point_hash = @game.assign_points %>
-  <table>
+  <table class="result-table">
     <tr>
       <th>Player</th>
       <th>Points Earned</th>
@@ -87,15 +95,16 @@
 
 
   <% if @game.owner == current_user %>
-    <%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
-    <%= link_to "Done Playing", results_path(game_id: @game.id), method: "post"%>
+    <div class="button green quarter center"><%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post", class: "b_link" %></div><br>
+    <div class="button red quarter center"><%= link_to "Done Playing", results_path(game_id: @game.id), method: "post", class: "b_link" %></div>
   <% elsif @next %>
-    <%= link_to "Keep Playing!", @next %>
+    <div class="button green quarter center"><%= link_to "Keep Playing!", @next, class: "b_link" %></div>
   <% else %>
     <h3>Waiting for game owner...</h3>
-    <%= button_to "Refresh", @game, method: :get %>
+    <div class="button green quarter center"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
+
   <% end %>
 
 <% when "Done" %>
- <%= link_to "Game Over! Check the Scores Here!", results_path(game_id: @game.id), method: "post" %>
+ <div class="button green quarter center"><%= link_to "Game Over! Check the Scores Here!", results_path(game_id: @game.id), method: "post", class: "b_link" %></div>
 <% end %>
