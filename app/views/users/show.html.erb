@@ -1,5 +1,5 @@
 <h1>Hello, <%= @user.name %>!</h1>
-<%= link_to "Home", root_path %>
+<div class="button green center quarter"><%= link_to "Go to Game Lobby", root_path, class: "b_link" %></div><br>
 
 
 <h3>Your lifetime points: <%=@user.lifetime_pts%></h3>
@@ -7,33 +7,35 @@
 <% if @user.best_definition %>
 <div class="col half">
 <h3>Voting History</h3>
+  <ul class="votes">
   <% @user.most_voted.each do |name, votes| %>
     <li>You've voted for <span class="bold"><%= name %></span><%= " #{votes} time(s)." %></li>
   <% end %>
+  </ul>
 </div>
 
 <div class="col half">
 <h3>Game History</h3>
-  <p>You've played:</p>
+  <p class="bold">You've played:</p>
   <p><%= @user.games_played %> game(s)</p>
 
-  <p>You've won:</p>
+  <p class="bold">You've won:</p>
   <p><%= @user.games_won %> game(s)</p>
 
-  <p>You've lost:</p>
+  <p class="bold">You've lost:</p>
   <p><%= @user.games_lost %> game(s)</p>
 </div>
 
 <div class="col half">
 <h3>Best Definition</h3>
-  <p><%= @user.best_definition.game.word %>:</p>
+  <h4 class="bold"><%= @user.best_definition.game.word.capitalize %>:</h4>
   <p>"<%= @user.best_definition.content %>"</p>
   <p>Bunk'd <%= @user.best_definition.votes.count %> / <%= @user.best_definition.game.player_count - 1 %> player(s)!</p>
 </div>
 
 <div class="col half">
 <h3>Lifetime Bunks</h3>
-  <p><%= @user.lifetime_bunks %></p>
+  <h1><%= @user.lifetime_bunks %></h1>
 </div>
 <% else %>
   <h3>Go Bunk Someone!</h3>

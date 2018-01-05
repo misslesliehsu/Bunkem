@@ -136,6 +136,12 @@ class Game < ApplicationRecord
     final_points_hash.sort_by {|key, value| value}.reverse.to_h
   end
 
-
+  def calc_results
+    final_points_hash.each do |username, pts|
+      @user = User.find_by(name:username)
+      @user.update(lifetime_pts: @user.lifetime_pts += pts)
+    end
+    self.update(done: true)
+  end
 
 end
