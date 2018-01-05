@@ -119,6 +119,19 @@ class Game < ApplicationRecord
     end
   end
 
+  def final_points_hash
+    all_games = Game.all.select do |game|
+      game.battle_id == self.battle_id
+    end
+
+    final_points_hash = {}
+    all_games.each do |game|
+      final_points_hash = final_points_hash.merge(game.points_hash){|player, allpts, points| allpts + points}
+    end
+
+    final_points_hash.sort_by {|key, value| value}.reverse.to_h
+  end
+
 
 
 end

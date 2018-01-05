@@ -4,14 +4,9 @@
 
 <h2>LOBBY</h2>
 
-<% if signed_in? %>
-  <%= link_to "Account", current_user %>
-  <%= link_to "Log Out", sessions_path, method: :delete %>
-<% else %>
-  <%= link_to "Log In", signin_path %>
-<% end %>
 
 <% if signed_in? %>
+<div class="section col full">
   <h3>Your Games</h3>
 
   <!-- ongoing_games = current_user.games.where(users.count == player_count).where(status != "Done") -->
@@ -36,18 +31,23 @@
     <% end %>
 
   </table>
+</div>
 <% end %>
 
-
-
+<div class="section col third">
 <h3>Start a New Game</h3>
-<%= form_for @game do |f| %>
-  <%= f.label :player_count %>
-  <%= f.select :player_count, (1..20) %>
+  <div class="form">
+    <%= form_for @game do |f| %>
+      <%= f.label :player_count %><br>
+      <div class="select-style">
+        <%= f.select :player_count, (2..20) %>
+      </div><br>
+      <div class="button green"><%= f.submit "Start Game", class: "b_link" %></div>
+    <% end %>
+  </div>
+</div>
 
-  <%= f.submit %>
-<% end %>
-
+<div class="section col two-third">
 <h3>Open Games</h3>
 
 <table>
@@ -61,8 +61,9 @@
       <tr>
         <td><%= game.title %></td>
         <td><%= "#{game.users.count} / #{game.player_count}" %></td>
-        <td><%= link_to "Join Game", participants_path(game: game.id), method: "post" %></td>
+        <td><div class="button green"><%= link_to "Join Game", participants_path(game: game.id), method: "post", class: "b_link" %></div></td>
       </tr>
     <% end %>
   <% end %>
 </table>
+</div>

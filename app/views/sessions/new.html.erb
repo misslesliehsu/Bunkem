@@ -5,14 +5,20 @@
 
 <h1>Log In</h1>
 
-<%= form_tag "/sessions" do %>
-  <%= label_tag "Name" %>
-  <%= text_field_tag :name %>
+<div class="user-form">
+  <%= form_tag "/sessions" do %>
+    <%= label_tag "Name" %>
+    <%= text_field_tag :name %>
 
-  <%= label_tag "Password" %>
-  <%= password_field_tag :password %>
+    <%= label_tag "Password" %>
+    <%= password_field_tag :password %>
 
-  <%= submit_tag "Log In", class: "submit" %>
-<% end %>
+    <div class="green button third center"><%= submit_tag "Log In", class: "submit", class: "b_link" %></div>
+  <% end %>
+</div>
 
-<%=link_to "OR -- Create New Account", new_user_path%>
+<br>
+
+<div class="button green third center">
+  <%=link_to "OR -- Create New Account", new_user_path, class: "b_link"%>
+</div>

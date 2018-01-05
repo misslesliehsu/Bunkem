@@ -9,28 +9,64 @@ class User < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  #Lifetime Points
-
   #Who they’ve voted for
-
-  #How many times they’ve won
-
-  #How many times they’ve guessed correctly
-
-  #Who has voted for them
+  def most_voted
+    voted_for = {}
+    self.votes.each do |vote|
+      selection = vote.definition.user.name
+      if selection == "THE BUNKER"
+        selection = "the correct answer"
+      end
+      if voted_for[selection]
+        voted_for[selection] += 1
+      else
+        voted_for[selection] = 1
+      end
+    end
+    voted_for
+  end
 
   #Games played
+  def finished_games
+    self.games.select do |game|
+      game.done
+    end
+  end
+
+  def games_played
+    finished_games.count
+  end
+
+  #How many times they’ve won
+  def games_won
+    finished_games.select do |game|
+      game.final_points_hash.first.first == self.name
+    end.count
+  end
 
   #Games lost
-
-  #Percent wins
+  def games_lost
+    games_played - games_won
+  end
 
   #Ranking of all players
-
-  #Part of speech column?
+  def self.top_players
+    top_ten = User.all.sort_by {|user| user.lifetime_pts}.reverse
+    top_ten.first(10).map do |user|
+      {user.name => user.lifetime_pts}
+    end
+  end
 
   #Best Definition
+  def best_definition
+    self.definitions.max_by do |definition|
+      definition.votes.count
+    end
+  end
 
-  #Perfect Games
+  #Lifetime Bunks
+  def lifetime_bunks
+    self.definitions.inject(0) {|sum, d| sum + d.votes.count }
+  end
 
 end

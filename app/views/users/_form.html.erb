@@ -4,12 +4,13 @@
   <%end%>
 <% end %>
 
-
+<div class="user-form">
 <%=form_for @user do |f|%>
 Name: <br />
 <%=f.text_field :name%><br/>
 Password: <br />
 <%= f.password_field :password %><br />
 
-<%= f.submit %>
+<div class="green button third center"><%= f.submit "Create Account", class: "b_link" %></div>
 <%end%>
+</div>

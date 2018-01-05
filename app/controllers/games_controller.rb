@@ -43,26 +43,18 @@ class GamesController < ApplicationController
   end
 
   def results
-    @battle_id = params[:battle_id].to_i
 
-    @all_games = Game.all.select do |game|
-      game.battle_id == @battle_id
-    end
+    @game = Game.find(params[:game_id])
 
-    @final_points_hash = {}
-    @all_games.each do |game|
-      @final_points_hash = @final_points_hash.merge(game.points_hash){|player, allpts, points| allpts + points}
-    end
+    @final_points_hash = @game.final_points_hash
 
-    if !@all_games.last.done
+    if !@game.done
       @final_points_hash.each do |username, pts|
         @user = User.find_by(name:username)
         @user.update(lifetime_pts: @user.lifetime_pts += pts)
       end
-      @all_games.last.update(done: true)
+      @game.update(done: true)
     end
-
-    @final_points_hash = @final_points_hash.sort_by {|key, value| value}.reverse.to_h
   end
 
 

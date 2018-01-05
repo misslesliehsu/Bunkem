@@ -1,21 +1,27 @@
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #EAFDE6;
+  background-image: url('dictionary-page.jpg');
+  background-repeat: repeat-x;
+  background-position: -25%;
+  margin: 0;
 }
 
 h1 {
   font-family: 'Luckiest Guy', sans-serif;
   text-align: center;
-  font-size: 5em;
+  font-size: 7em;
   color: #88C425;
-  margin: 5% 0 0 0;
+  margin: 4% 0 0 0;
+  text-shadow: 0.03em 0.03em 0 rgba(35, 50, 25, 0.15);
+  letter-spacing: .05em;
 }
 
 h3 {
   text-align: center;
   font-size: 2em;
   color: #1B676B;
-  margin: 0 0;
+  margin: 0 0 1% 0;
   font-weight: 700;
 }
 
@@ -24,21 +30,34 @@ h2 {
   text-align: center;
   font-size: 3em;
   color: #88C425;
+  margin: 2% 0 0 0;
 }
 
 table {
   margin: auto;
-  width: 70%;
+  width: 100%;
 }
 
-td {
+.section th {
+  background-color: #1B676B;
+  color: #FFF;
+  width: 33%;
+}
+
+.section td {
   width: 33%;
   text-align: center;
+  background-color: #eefce3;
+  padding: .5% 0 1% 0;
 }
 
 .container {
-  width: 90%;
+  width: 80%;
   margin: auto;
+  overflow:hidden;
+  background-color: #FFF;
+  height: 100vh;
+  box-shadow: 0px 0px 20px #333;
 }
 
 .button:hover {
@@ -48,7 +67,6 @@ td {
 
 .button {
   position: relative;
-  float: left;
   margin: auto;
   padding-bottom: 3px;
   border-radius: 5px;
@@ -57,13 +75,18 @@ td {
 }
 
 .green {
-  background-color: rgb(106 166 7);
-  box-shadow: 0 2px 0 rgb(66 126 0);
+  background-color: #6aa607;
+  box-shadow: 0 2px 0 #427e00;
 }
 
 .yellow {
-  background-color: rgb(255 185 4);
-  box-shadow: 0 2px 0 rgb(215 145 0);
+  background-color: #ffb904;
+  box-shadow: 0 2px 0 #d79100;
+}
+
+.red {
+  background-color: #db2f1c;
+  box-shadow: 0 2px 0 #7c1509;
 }
 
 .b_link {
@@ -72,4 +95,145 @@ td {
   font-weight: 500;
   padding: 2%;
   width: 100%;
+}
+
+.section {
+  width: 100%;
+  margin: 3%;
+}
+
+.floater {
+  z-index: 5;
+  display: inline;
+  background-color: #6aa607;
+  text-decoration: none;
+  font-weight: 500;
+  color: #FFF;
+  padding: 1%;
+}
+
+hr {
+  margin: 2% 0;
+  opacity: .25;
+}
+
+.col {
+  float: left;
+  text-align: center;
+}
+
+.third {
+  width: 27%;
+}
+
+.two-third {
+  width: 60%;
+}
+
+.half {
+  width: 50%;
+}
+
+.full {
+  width: 94%;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: fixed;
+    left: 12%;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.select-style {
+  margin: auto;
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("down-arrow.png") no-repeat 90% 50%;
+    background-size: 15%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+input {
+  border:none;
+  background-color: transparent;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.user-form {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.user-form input {
+  border: solid 1px #DDD;
+  display: block;
+  margin: 2% auto;
 }

@@ -11,7 +11,25 @@
 
   <body>
     <div class="container">
-      <h3><%= current_user.name if current_user_id%></h3>
+      <% if signed_in? %>
+        <div class="dropdown">
+          <div class="dropbtn">Logged in as: <%= current_user.name %>
+            <div class="dropdown-content">
+              <%= link_to "Account", current_user %>
+              <%= link_to "Log Out", sessions_path, method: :delete %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="dropdown">
+          <div class="dropbtn">Sign In/Up
+            <div class="dropdown-content">
+              <%= link_to "Sign In", signin_path %>
+              <%= link_to "Sign Up", new_user_path %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>

@@ -13,10 +13,10 @@
 <% case @game.status %>
 <% when "Waiting for Players" %>
   <h3>Waiting for players, hang in there!</h3>
-  <%= button_to "Refresh", @game, method: :get %>
+  <div class="button green"><%= link_to "Check Status", @game, method: :get, class: "b_link" %></div>
 
 
-  <%= button_to "Leave Game", Participant.find_by(user:current_user, game: @game), method: :delete %>
+  <div class="button red"><%= link_to "Leave Game", Participant.find_by(user:current_user, game: @game), method: :delete, class: "b_link" %></div>
 
 <% when "Waiting for Submissions" %>
   <% if !@game.definition_users.include?(current_user) %>
@@ -67,7 +67,7 @@
       <th>Player</th>
       <th>Points Earned</th>
       <th>Definition</th>
-      <th>Who Got Bunked?</th>
+      <th>Who Got Bunk'd?</th>
     </tr>
     <% @game.definitions.each do |definition| %>
     <tr>
@@ -88,14 +88,14 @@
 
   <% if @game.owner == current_user %>
     <%= link_to "Play Another Round", next_round_path(player_count: @game.player_count, battle_id: @game.battle_id, participants: @game.participants.map {|p| p.id}), method: "post" %>
-    <%= link_to "Done Playing", results_path(battle_id: @game.battle_id), method: "post"%>
+    <%= link_to "Done Playing", results_path(game_id: @game.id), method: "post"%>
   <% elsif @next %>
     <%= link_to "Keep Playing!", @next %>
   <% else %>
     <h3>Waiting for game owner...</h3>
-    <%= button_to "Refresh", @game.id, method: :get %>
+    <%= button_to "Refresh", @game, method: :get %>
   <% end %>
 
 <% when "Done" %>
- <%= link_to "Game Over! Check the Scores Here!", results_path(battle_id: @game.battle_id), method: "post" %>
+ <%= link_to "Game Over! Check the Scores Here!", results_path(game_id: @game.id), method: "post" %>
 <% end %>
