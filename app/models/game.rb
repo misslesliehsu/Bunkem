@@ -17,7 +17,11 @@ class Game < ApplicationRecord
 
   def set_word
     play_word = Word.all.sample.word
-    if used_words.include?(play_word)
+    if used_words.length == Word.all.length
+      begin
+        raise StandardError
+      end
+    elsif used_words.include?(play_word)
       set_word
     else
       self.update(word: play_word)
