@@ -1,6 +1,10 @@
 <h1>Results Page</h1>
 
-<h2>Congratulations, <%=@final_points_hash.keys.first%>!</h2>
+<% if @final_points_hash.values[0] == @final_points_hash.values[1] %>
+  <h2>It's a tie! Bunk harder next time.</h2>
+<% else %>
+  <h2>Congratulations, <%=@final_points_hash.keys.first%>!</h2>
+<% end %>
 
 <table>
   <tr>
