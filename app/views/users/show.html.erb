@@ -4,6 +4,7 @@
 
 <h3>Your lifetime points: <%=@user.lifetime_pts%></h3>
 
+<% if @user.best_definition %>
 <div class="col half">
 <h3>Voting History</h3>
   <% @user.most_voted.each do |name, votes| %>
@@ -24,17 +25,6 @@
 </div>
 
 <div class="col half">
-<h3>Top Players</h3>
-  <ul>
-  <% @user.class.top_players.each do |hash| %>
-    <% if hash.values.first > 0 %>
-      <li><%= hash.keys.first %> with <%= hash.values.first %> points</li>
-    <% end %>
-  <% end %>
-  </ul>
-</div>
-
-<div class="col half">
 <h3>Best Definition</h3>
   <p><%= @user.best_definition.game.word %>:</p>
   <p>"<%= @user.best_definition.content %>"</p>
@@ -45,3 +35,6 @@
 <h3>Lifetime Bunks</h3>
   <p><%= @user.lifetime_bunks %></p>
 </div>
+<% else %>
+  <h3>Go Bunk Someone!</h3>
+<% end %>

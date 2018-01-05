@@ -6,7 +6,7 @@
 
 
 <% if signed_in? %>
-<div class="section col full">
+<div class="section col two-third">
   <h3>Your Games</h3>
 
   <!-- ongoing_games = current_user.games.where(users.count == player_count).where(status != "Done") -->
@@ -66,4 +66,15 @@
     <% end %>
   <% end %>
 </table>
+</div>
+
+<div class="section col third">
+<h3>Top Players</h3>
+  <ul>
+  <% User.top_players.each do |hash| %>
+    <% if hash.values.first > 0 %>
+      <li><%= hash.keys.first %> with <%= hash.values.first %> points</li>
+    <% end %>
+  <% end %>
+  </ul>
 </div>
