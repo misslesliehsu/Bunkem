@@ -40,7 +40,7 @@ class User < ApplicationRecord
   #How many times they’ve won
   def games_won
     finished_games.select do |game|
-      game.final_points_hash.first.first == self.name
+      (game.final_points_hash.keys.first == self.name) && (game.final_points_hash.values[0] != game.final_points_hash.values[1])
     end.count
   end
 
