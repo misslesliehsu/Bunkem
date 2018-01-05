@@ -93,6 +93,8 @@ require 'rails_helper'
       expect(@game.assign_points).to eq({@player2.name => 200, @player1.name => 0})
       @game.update(battle_id: 100)
       @game.calc_results
+      @player1 = User.find_by(name:"player1")
+      @player2 = User.find_by(name:"player2")
       expect(@player1.lifetime_pts).to eq(0)
       expect(@player2.lifetime_pts).to eq(200)
       end
