@@ -49,11 +49,7 @@ class GamesController < ApplicationController
     @final_points_hash = @game.final_points_hash
 
     if !@game.done
-      @final_points_hash.each do |username, pts|
-        @user = User.find_by(name:username)
-        @user.update(lifetime_pts: @user.lifetime_pts += pts)
-      end
-      @game.update(done: true)
+      @game.calc_results
     end
   end
 
